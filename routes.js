@@ -164,6 +164,22 @@ exports = module.exports = function(app, passport) {
   app.get('/account/settings/google/callback/', require('./views/account/settings/index').connectGoogle);
   app.get('/account/settings/google/disconnect/', require('./views/account/settings/index').disconnectGoogle);
 
+  // Full Element 
+  app.get('/timeline*', require('./views/timeline/index').init);
+  app.get('/post*', require('./views/post/index').init);
+
+  // Full Element >> Forms
+  app.get('/1/post', require('./views/api/post').readAll);
+  app.post('/1/post', require('./views/api/post').create);
+  app.post('/1/post/query', require('./views/api/post').createByQuery);
+  app.put('/1/post', require('./views/api/post').create);
+  app.put('/1/post/:subject/publish', require('./views/api/post').activate);      
+  app.put('/1/post/:subject/unpublish', require('./views/api/post').inactivate);    
+  // this is the really delete, so must be admin
+  app.delete('/1/post/:id', ensureAuthenticated);
+  app.delete('/1/post/:id', ensureAdmin);  
+  app.delete('/1/post/:id', require('./views/api/post').delete); 
+
   //route not found
   app.all('*', require('./views/http/index').http404);
 };

@@ -1,5 +1,12 @@
 extends layouts/default
 
+block fb_meta
+  meta(property='og:site_name', content='MokoVersity 開放創新學院')
+  meta(property='og:title', content='創業咖啡專欄')
+  meta(property='og:url', content='#{currentURL("")}')
+  meta(property='og:image', content='http://cdn.mokoversity.com/images/logo/mokoversity.png')
+  meta(property='article:published_time', content='')
+  
 block head
   title #{projectName}
 
